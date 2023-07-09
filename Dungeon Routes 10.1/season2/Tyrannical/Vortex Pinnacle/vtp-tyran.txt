@@ -4,7 +4,7 @@ override.windfury_totem=0
 override.arcane_intellect=0
 override.power_word_fortitude=1
 override.battle_shout=0
-override.mark_of_the_wild=0
+override.mark_of_the_wild=1
 override.mystic_touch=0
 override.chaos_brand=0
 override.bleeding=0
@@ -15,7 +15,7 @@ enemy_health=999999
 keystone_level=22
 keystone_pct_hp=27
 
-raid_events+=/pull,pull=01,bloodlust=0,delay=014,enemies="Gust_Soldier_1":1550476:Elemental|"Armored_Mistral_1":2790856:Elemental|"Armored_Mistral_2":2790856:Elemental|"Armored_Mistral_3":2790856:Elemental|"Wild_Vortex_1":1395429:Elemental
+raid_events+=/pull,pull=01,bloodlust=1,delay=014,enemies="Gust_Soldier_1":1550476:Elemental|"Armored_Mistral_1":2790856:Elemental|"Armored_Mistral_2":2790856:Elemental|"Armored_Mistral_3":2790856:Elemental|"Wild_Vortex_1":1395429:Elemental
 raid_events+=/pull,pull=02,bloodlust=0,delay=012,enemies="Gust_Soldier_1":1550476:Elemental|"Wild_Vortex_1":1395429:Elemental|"Wild_Vortex_2":1395429:Elemental
 raid_events+=/pull,pull=03,bloodlust=0,delay=012,enemies="Gust_Soldier_1":1550476:Elemental|"Gust_Soldier_2":1550476:Elemental|"Wild_Vortex_1":1395429:Elemental
 raid_events+=/pull,pull=04,bloodlust=0,delay=007,enemies="Gust_Soldier_1":1550476:Elemental|"Gust_Soldier_2":1550476:Elemental|"Armored_Mistral_1":2790856:Elemental|"Wild_Vortex_1":1395429:Elemental|"Wild_Vortex_2":1395429:Elemental
@@ -28,11 +28,11 @@ raid_events+=/pull,pull=10,bloodlust=0,delay=009,enemies="Empyrean_Assassin_1":1
 raid_events+=/pull,pull=11,bloodlust=0,delay=012,enemies="Wild_Vortex_1":1395429:Elemental|"Wild_Vortex_2":1395429:Elemental|"Turbulent_Squall_1":1394895:Elemental|"Turbulent_Squall_2":1394895:Elemental|"Gust_Soldier_1":1550476:Elemental
 raid_events+=/pull,pull=12,bloodlust=0,delay=013,enemies="Empyrean_Assassin_1":1550476:Elemental|"Empyrean_Assassin_2":1550476:Elemental|"Empyrean_Assassin_3":1550476:Elemental|"Empyrean_Assassin_4":1550476:Elemental
 raid_events+=/pull,pull=13,bloodlust=0,delay=012,enemies="Turbulent_Squall_1":1394895:Elemental|"Turbulent_Squall_2":1394895:Elemental|"Turbulent_Squall_3":1394895:Elemental|"Turbulent_Squall_4":1394895:Elemental|"Empyrean_Assassin_1":1550476:Elemental|"Empyrean_Assassin_2":1550476:Elemental
-raid_events+=/pull,pull=14,bloodlust=0,delay=014,enemies="BOSS_Altairus":18150442:Dragonkin
+raid_events+=/pull,pull=14,bloodlust=1,delay=014,enemies="BOSS_Altairus":18150442:Dragonkin
 raid_events+=/pull,pull=15,bloodlust=0,delay=008,enemies="Temple_Adept_1":1240380:Humanoid|"Servant_of_Asaad_1":1860570:Humanoid|"Servant_of_Asaad_2":1860570:Humanoid|"Executor_of_the_Caliph_1":2480761:Humanoid
 raid_events+=/pull,pull=16,bloodlust=0,delay=013,enemies="Temple_Adept_1":1240380:Humanoid|"Servant_of_Asaad_1":1860570:Humanoid|"Servant_of_Asaad_2":1860570:Humanoid|"Minister_of_Air_1":3411047:Humanoid
 raid_events+=/pull,pull=17,bloodlust=0,delay=013,enemies="Skyfall_Star_1":155048:Elemental|"Skyfall_Star_2":155048:Elemental|"Skyfall_Star_3":155048:Elemental|"Skyfall_Star_4":155048:Elemental|"Skyfall_Star_5":155048:Elemental|"Skyfall_Star_6":155048:Elemental|"Skyfall_Star_7":155048:Elemental|"Skyfall_Star_8":155048:Elemental|"Skyfall_Star_9":155048:Elemental|"Skyfall_Star_10":155048:Elemental|"Skyfall_Star_11":155048:Elemental|"Skyfall_Star_12":155048:Elemental|"Skyfall_Star_13":155048:Elemental|"Skyfall_Star_14":155048:Elemental|"Skyfall_Star_15":155048:Elemental|"Skyfall_Star_16":155048:Elemental
 raid_events+=/pull,pull=18,bloodlust=0,delay=005,enemies="Temple_Adept_1":1240380:Humanoid|"Temple_Adept_2":1240380:Humanoid|"Servant_of_Asaad_1":1860570:Humanoid|"Servant_of_Asaad_2":1860570:Humanoid|"Executor_of_the_Caliph_1":2480761:Humanoid
 raid_events+=/pull,pull=19,bloodlust=0,delay=014,enemies="Minister_of_Air_1":3411047:Humanoid|"Executor_of_the_Caliph_1":2480761:Humanoid|"Executor_of_the_Caliph_2":2480761:Humanoid|"Servant_of_Asaad_1":1860570:Humanoid|"Servant_of_Asaad_2":1860570:Humanoid
 raid_events+=/pull,pull=20,bloodlust=0,delay=007,enemies="Skyfall_Star_1":155048:Elemental|"Skyfall_Star_2":155048:Elemental|"Skyfall_Star_3":155048:Elemental|"Skyfall_Star_4":155048:Elemental|"Skyfall_Star_5":155048:Elemental|"Skyfall_Star_6":155048:Elemental|"Skyfall_Star_7":155048:Elemental|"Skyfall_Star_8":155048:Elemental|"Skyfall_Star_9":155048:Elemental|"Skyfall_Star_10":155048:Elemental|"Skyfall_Star_11":155048:Elemental|"Skyfall_Star_12":155048:Elemental|"Skyfall_Star_13":155048:Elemental|"Skyfall_Star_14":155048:Elemental|"Skyfall_Star_15":155048:Elemental|"Skyfall_Star_16":155048:Elemental
-raid_events+=/pull,pull=21,bloodlust=0,delay=008,enemies="BOSS_Asaad":16133726:Elemental
+raid_events+=/pull,pull=21,bloodlust=1,delay=008,enemies="BOSS_Asaad":16133726:Elemental
