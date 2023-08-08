@@ -1,0 +1,33 @@
+# !9v12oYjmm0)OkscxFVsv9IODl95ODNbNT0YcvmW0PVSF7LC1MmWknkeL5e7JTp2rYK)q2mE6xW55lRBNLnTDkv35L(5)jR5jVlr28xa(96E92Rp1Va6RCEzAcgMF)YWZW4WhBVjRlk0iUa9R2QBCWAnhUVT03lRzAaZa8s3WZYAJTN6uZFvPUaE3)NvK6TgW6pPUVRFQZ1lAIuNTUmVEQdLqFwPEjnGtdPUWHlZIdnG(pSg1CnHbxZ5X(XjzJsjaLsFr(oSqems6oSi9oljaniXowIhwyB5PyhRNUj4JySaQCm2BFoXpSTwk4rRFYIyS6KLXoUWerX(mADmae7XjD0RHN7Sq(DCIMNQmylSykiqlcEjuRQRcfBwsiNWWQVH1UQmEvMltuzTEfEZe8MOQGXrnenQSz6shfzeQwHv0eRRkivutcWXAVc2vVOQ1kIyfdJyHvLRm5qxgPRqOpX81bdNIsU87LvO8ZWb0hzHqmhtArDs87Yw26Qpn92AahpjI3d7ve0eR9OusNI7OmcZ3z2azYb7G2aV(N2qXXMrRMlkTzQUoLvoo5IOjlq)wfYQmmRYrPykkfzLO2MO4nZPDoLZqVY5h0qsNc5JP0n9Yy2K0z7ZMrJIYpOvMonBR00B7WuuCOAKxkJgLFFBOFQYMbEj7mYqGEdB8f4dlcICg1Z5y1HtmDgcZwoS)lNm8HxGvOcsbQKuGQoOPM5BrtoSDr3SyYa4ZSnlN6HRqFa6mCBD97JlZWRpkE9rU9NS5L2o9Z4Qja(5yF7Ng7gGw5j8e3R1NGNx66nVx7m5sxRS5lxlHPhE42Tp)H1ZK)ha
+fight_style=DungeonRoute
+override.bloodlust=1
+override.windfury_totem=0
+override.arcane_intellect=0
+override.power_word_fortitude=1
+override.battle_shout=0
+override.mark_of_the_wild=1
+override.mystic_touch=0
+override.chaos_brand=0
+single_actor_batch=1
+max_time=1800
+enemy="VP 28 Tyrannical"
+enemy_health=999999
+keystone_level=28
+
+raid_events+=/pull,pull=01,bloodlust=1,delay=025,enemies="gust-soldier_1":3295763|"gust-soldier_2":3295763|"wild-vortex_1":2966187|"wild-vortex_2":2966187|"wild-vortex_3":2966187|"armored-mistral_1":5932372|"armored-mistral_2":5932372|"armored-mistral_3":5932372
+raid_events+=/pull,pull=02,bloodlust=0,delay=017,enemies="gust-soldier_1":3295763|"gust-soldier_2":3295763|"wild-vortex_1":2966187
+raid_events+=/pull,pull=03,bloodlust=0,delay=009,enemies="gust-soldier_1":3295763|"gust-soldier_2":3295763|"armored-mistral_1":5932372|"wild-vortex_1":2966187|"wild-vortex_2":2966187
+raid_events+=/pull,pull=04,bloodlust=0,delay=011,enemies="cloud-prince_1":5273218|"wild-vortex_1":2966187|"wild-vortex_2":2966187
+raid_events+=/pull,pull=05,bloodlust=0,delay=012,enemies="lurking-tempest_1":7909830|"cloud-prince_1":5273218|"cloud-prince_2":5273218
+raid_events+=/pull,pull=06,bloodlust=0,delay=010,enemies="BOSS_grand-vizier-ertan_1":19214820
+raid_events+=/pull,pull=07,bloodlust=0,delay=042,enemies="turbulent-squall_1":2965054|"turbulent-squall_2":2965054|"turbulent-squall_3":2965054|"turbulent-squall_4":2965054|"turbulent-squall_5":2965054|"turbulent-squall_6":2965054|"turbulent-squall_7":2965054|"turbulent-squall_8":2965054|"empyrean-assassin_1":3295763|"empyrean-assassin_2":3295763|"empyrean-assassin_3":3295763|"empyrean-assassin_4":3295763
+raid_events+=/pull,pull=08,bloodlust=1,delay=020,enemies="wild-vortex_1":2966187|"wild-vortex_2":2966187|"turbulent-squall_1":2965054|"turbulent-squall_2":2965054|"gust-soldier_1":3295763|"empyrean-assassin_1":3295763|"empyrean-assassin_2":3295763
+raid_events+=/pull,pull=09,bloodlust=0,delay=018,enemies="young-storm-dragon_1":7909830
+raid_events+=/pull,pull=10,bloodlust=0,delay=033,enemies="turbulent-squall_1":2965054|"turbulent-squall_2":2965054|"turbulent-squall_3":2965054|"turbulent-squall_4":2965054|"empyrean-assassin_1":3295763|"empyrean-assassin_2":3295763|"empyrean-assassin_3":3295763|"empyrean-assassin_4":3295763
+raid_events+=/pull,pull=11,bloodlust=0,delay=012,enemies="BOSS_altairus_1":24704768
+raid_events+=/pull,pull=12,bloodlust=0,delay=065,enemies="temple-adept_1":2636609|"temple-adept_2":2636609|"minister-of-air_1":7250676|"executor-of-the-caliph_1":5273218|"servant-of-asaad_1":3954913|"servant-of-asaad_2":3954913|"servant-of-asaad_3":3954913|"servant-of-asaad_4":3954913
+raid_events+=/pull,pull=13,bloodlust=0,delay=022,enemies="skyfall-star_1":329578|"skyfall-star_2":329578|"skyfall-star_3":329578|"skyfall-star_4":329578|"skyfall-star_5":329578|"skyfall-star_6":329578|"skyfall-star_7":329578|"skyfall-star_8":329578|"skyfall-star_9":329578|"skyfall-star_10":329578|"skyfall-star_11":329578|"skyfall-star_12":329578|"skyfall-star_13":329578|"skyfall-star_14":329578|"skyfall-star_15":329578|"skyfall-star_16":329578
+raid_events+=/pull,pull=14,bloodlust=0,delay=010,enemies="temple-adept_1":2636609|"temple-adept_2":2636609|"executor-of-the-caliph_1":5273218|"servant-of-asaad_1":3954913|"servant-of-asaad_2":3954913
+raid_events+=/pull,pull=15,bloodlust=0,delay=010,enemies="minister-of-air_1":7250676|"executor-of-the-caliph_1":5273218|"executor-of-the-caliph_2":5273218|"servant-of-asaad_1":3954913|"servant-of-asaad_2":3954913
+raid_events+=/pull,pull=16,bloodlust=0,delay=019,enemies="skyfall-star_1":329578|"skyfall-star_2":329578|"skyfall-star_3":329578|"skyfall-star_4":329578|"skyfall-star_5":329578|"skyfall-star_6":329578|"skyfall-star_7":329578|"skyfall-star_8":329578|"skyfall-star_9":329578|"skyfall-star_10":329578|"skyfall-star_11":329578|"skyfall-star_12":329578|"skyfall-star_13":329578|"skyfall-star_14":329578|"skyfall-star_15":329578|"skyfall-star_16":329578
+raid_events+=/pull,pull=17,bloodlust=1,delay=013,enemies="BOSS_asaad_1":21959794
