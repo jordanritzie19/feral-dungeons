@@ -1,0 +1,25 @@
+merge_enemy_priority_dmg=1                                                                                          # combines add_boss damage to boss damage for sake of 'prio' damage
+override.spell_data=effect.4249.base_value=50																		# mimics haste buff by overriding power infusion strength, and setting timers
+external_buffs.power_infusion=126/260/420																			# the aformentioned set timers, not actually for power infusion
+ 
+#p1+2
+raid_events+=/invulnerable,first=102,duration=24,cooldown=6000														# invuln mimics the boss going immune at the end of phase 1 until the start of p2
+raid_events+=/adds,name=NullGlimmer,count=5,first=130,duration=7,cooldown=6000										# phase 2 has 3 sets of adds, spawning 5 null glimmers and 1 empty recollection
+raid_events+=/adds,name=EmptyRecollection,count=1,first=130,duration=15,cooldown=6000,type=add_boss						# though its not at equal intervals so they are just separated out for clarity
+ 
+raid_events+=/adds,name=NullGlimmer,count=5,first=180,duration=11,cooldown=6000
+raid_events+=/adds,name=EmptyRecollection,count=1,first=180,duration=27,cooldown=6000,type=add_boss
+ 
+raid_events+=/adds,name=NullGlimmer,count=5,first=208,duration=11,cooldown=6000
+raid_events+=/adds,name=EmptyRecollection,count=1,first=208,duration=23,cooldown=6000,type=add_boss
+ 
+#p3
+raid_events+=/invulnerable,first=240,duration=20,cooldown=6000														# at the end of phase 2, the boss goes immune again, though perhaps
+raid_events+=/adds,name=NullGlimmer,count=3,first=260,duration=9,cooldown=6000										
+raid_events+=/adds,name=NullGlimmer,count=3,first=312,duration=12,cooldown=6000
+ 
+raid_events+=/invulnerable,first=405,duration=15,cooldown=6000
+raid_events+=/adds,name=NullGlimmer,count=3,first=420,duration=10,cooldown=6000
+ 
+max_time=450
+vary_combat_length=0
