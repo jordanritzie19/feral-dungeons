@@ -12,7 +12,7 @@ actions+=/cat_form,if=!buff.cat_form.up
 # <a href='https://www.wowhead.com/spell=10060/power-infusion'>Power Infusion</a> does not line up very well with <a href='https://www.wowhead.com/spell=106951/berserk'>Berserk</a> nor <a href='https://www.wowhead.com/spell=102543/incarnation-avatar-of-ashamane'>Incarnation</a> and <a href='https://www.wowhead.com/spell=323764/convoke-the-spirits?spellModifier=768'>Convoke</a> doesn't benefit much from haste.
 actions+=/invoke_external_buff,name=power_infusion
 actions+=/call_action_list,name=variables
-actions+=/tigers_fury,target_if=min:target.time_to_die,if=talent.convoke_the_spirits.enabled|!talent.convoke_the_spirits.enabled&(!buff.tigers_fury.up|energy.deficit>65)|(target.time_to_die<15&talent.predator.enabled)
+actions+=/tigers_fury,target_if=min:target.time_to_die,if=talent.convoke_the_spirits.enabled|!buff.tigers_fury.up|energy.deficit>65|target.time_to_die<15&talent.predator.enabled|set_bonus.tier31_2pc
 actions+=/rake,target_if=persistent_multiplier>dot.rake.pmultiplier,if=buff.prowl.up|buff.shadowmeld.up
 actions+=/auto_attack,if=!buff.prowl.up&!buff.shadowmeld.up
 actions+=/natures_vigil,if=spell_targets.swipe_cat>0
@@ -20,7 +20,7 @@ actions+=/renewal,if=variable.regrowth
 actions+=/adaptive_swarm,target_if=((!dot.adaptive_swarm_damage.ticking|dot.adaptive_swarm_damage.remains<2)&(dot.adaptive_swarm_damage.stack<3)&!action.adaptive_swarm_damage.in_flight&!action.adaptive_swarm.in_flight)&target.time_to_die>5,if=!talent.unbridled_swarm.enabled|spell_targets.swipe_cat=1
 # in reality, with unbridled talented adaptive swarm should be targeting allies out of combat, and often in single target too. This isn't supported by simc at time of writing though, so will have to settle with just this
 actions+=/adaptive_swarm,target_if=max:((1+dot.adaptive_swarm_damage.stack)*dot.adaptive_swarm_damage.stack<3*time_to_die),if=dot.adaptive_swarm_damage.stack<3&talent.unbridled_swarm.enabled&spell_targets.swipe_cat>1
-actions+=/call_action_list,name=cooldown,if=debuff.dire_fixation.up&(time>3|combo_points<4)
+actions+=/call_action_list,name=cooldown,if=(!talent.dire_fixation.enabled|debuff.dire_fixation.up)&(time>3|combo_points<4)
 actions+=/feral_frenzy,target_if=max:target.time_to_die,if=(combo_points<3|(time<10&combo_points<4))&(!talent.dire_fixation.enabled|debuff.dire_fixation.up)
 actions+=/ferocious_bite,target_if=max:target.time_to_die,if=buff.apex_predators_craving.up&(spell_targets.swipe_cat=1|!talent.primal_wrath.enabled|!buff.sabertooth.up)
 actions+=/call_action_list,name=berserk,if=buff.bs_inc.up
@@ -94,8 +94,10 @@ actions.cooldown=use_item,name=algethar_puzzle_box,if=fight_remains<35|(!variabl
 actions.cooldown+=/use_item,name=algethar_puzzle_box,if=variable.align_3minutes&(cooldown.bs_inc.remains<3&(!variable.lastZerk|!variable.lastConvoke|(variable.lastConvoke&cooldown.convoke_the_spirits.remains<13)))
 # next two lines check if the current pull is long enough to justify cd usage. If its the last pull, itll always use cds.
 actions.cooldown+=/incarnation,target_if=max:target.time_to_die,if=(target.time_to_die<fight_remains&target.time_to_die>25)|target.time_to_die=fight_remains
+# With 2 minute convoke, it can sometimes be correct to line berserk up with it
+actions.cooldown+=/berserk,if=fight_remains<23|fight_remains<cooldown.convoke_the_spirits.remains|(variable.align_cds&buff.smoldering_frenzy.up&cooldown.convoke_the_spirits.remains<8)
 # its a gain to hold your last berserk cast to line it up with convoke (but not vice versa) --((!variable.lastZerk...))                                                                                                                 
-actions.cooldown+=/berserk,target_if=max:target.time_to_die,if=(time+122)%%122<5|time>110
+actions.cooldown+=/berserk,target_if=max:target.time_to_die,if=(!variable.align_cds&((!variable.lastZerk)|(variable.lastZerk&!variable.lastConvoke)|(variable.lastConvoke&cooldown.convoke_the_spirits.remains<10))&((target.time_to_die<fight_remains&target.time_to_die>18)|target.time_to_die=fight_remains))
 actions.cooldown+=/berserking,if=!variable.align_3minutes|buff.bs_inc.up
 actions.cooldown+=/use_item,name=mirror_of_fractured_tomorrows|irideus_fragment,if=!variable.align_3minutes|buff.bs_inc.up|(variable.lastConvoke&!variable.lastZerk&cooldown.convoke_the_spirits.remains<1)
 actions.cooldown+=/potion,if=buff.bs_inc.up|fight_remains<32|(!variable.lastZerk&variable.lastConvoke&cooldown.convoke_the_spirits.remains<10)
@@ -125,3 +127,4 @@ actions.variables+=/variable,name=regrowth,op=reset
 actions.variables+=/variable,name=easy_swipe,op=reset
 # aka you have 1 gcd left before you have to convoke
 actions.variables+=/variable,name=short_circuit,value=buff.smoldering_frenzy.up&talent.convoke_the_spirits.enabled&cooldown.convoke_the_spirits.remains<1&buff.smoldering_frenzy.remains<6.1-talent.ashamanes_guidance&buff.smoldering_frenzy.remains>5.1-talent.ashamanes_guidance
+actions.variables+=/variable,name=align_cds,value=(((trinket.1.is.ashes_of_the_embersoul|trinket.2.is.ashes_of_the_embersoul)&(time+fight_remains>145&time+fight_remains<210|time+fight_remains>265&time+fight_remains<315|time+fight_remains>380&time+fight_remains<415|time+fight_remains>480&time+fight_remains<510))|(time+fight_remains>150&time+fight_remains<200|time+fight_remains>270&time+fight_remains<295|time+fight_remains>395&time+fight_remains<400|time+fight_remains>490&time+fight_remains<495))&(talent.convoke_the_spirits.enabled&!talent.ashamanes_guidance.enabled)&fight_style.patchwerk&spell_targets.swipe_cat=1&set_bonus.tier31_2pc
