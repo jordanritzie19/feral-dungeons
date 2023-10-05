@@ -20,8 +20,7 @@ actions+=/renewal,if=variable.regrowth
 actions+=/adaptive_swarm,target_if=((!dot.adaptive_swarm_damage.ticking|dot.adaptive_swarm_damage.remains<2)&(dot.adaptive_swarm_damage.stack<3)&!action.adaptive_swarm_damage.in_flight&!action.adaptive_swarm.in_flight)&target.time_to_die>5,if=!talent.unbridled_swarm.enabled|spell_targets.swipe_cat=1
 # in reality, with unbridled talented adaptive swarm should be targeting allies out of combat, and often in single target too. This isn't supported by simc at time of writing though, so will have to settle with just this
 actions+=/adaptive_swarm,target_if=max:((1+dot.adaptive_swarm_damage.stack)*dot.adaptive_swarm_damage.stack<3*time_to_die),if=dot.adaptive_swarm_damage.stack<3&talent.unbridled_swarm.enabled&spell_targets.swipe_cat>1
-actions+=/shred,if=spell_targets=1&time<3&!debuff.dire_fixation.up
-actions+=/call_action_list,name=cooldown,if=time>3|combo_points<4
+actions+=/call_action_list,name=cooldown,if=debuff.dire_fixation.up&(time>3|combo_points<4)
 actions+=/feral_frenzy,target_if=max:target.time_to_die,if=(combo_points<3|(time<10&combo_points<4))&(!talent.dire_fixation.enabled|debuff.dire_fixation.up)
 actions+=/ferocious_bite,target_if=max:target.time_to_die,if=buff.apex_predators_craving.up&(spell_targets.swipe_cat=1|!talent.primal_wrath.enabled|!buff.sabertooth.up)
 actions+=/call_action_list,name=berserk,if=buff.bs_inc.up
@@ -30,7 +29,7 @@ actions+=/wait,sec=combo_points=5,if=combo_points=4&buff.predator_revealed.react
 actions+=/call_action_list,name=finisher,if=combo_points>=4|variable.short_circuit
 # actions+=/call_action_list,name=bloodtalons,if=variable.need_bt&!buff.bs_inc.up&combo_points<5
 actions+=/call_action_list,name=aoe_builder,if=spell_targets.swipe_cat>1&combo_points<5
-actions+=/call_action_list,name=st_builder,if=!buff.bs_inc.up&spell_targets.swipe_cat=1&combo_points<5
+actions+=/call_action_list,name=builder,if=!buff.bs_inc.up&spell_targets.swipe_cat=1&combo_points<5
 actions+=/regrowth,if=energy<25&buff.predatory_swiftness.up&!buff.clearcasting.up&variable.regrowth
 
 # if you need to proc bloodtalons, skip actions that you've already casted towards bloodtalons
@@ -72,6 +71,25 @@ actions.berserk+=/moonfire_cat,if=refreshable
 actions.berserk+=/brutal_slash,if=cooldown.brutal_slash.charges>1
 actions.berserk+=/shred
 
+# if you need to proc bloodtalons, skip actions that you've already casted towards bloodtalons
+actions.builder+=/thrash_cat,if=refreshable&(!talent.dire_fixation.enabled|talent.dire_fixation.enabled&debuff.dire_fixation.up)&buff.clearcasting.react
+actions.builder+=/shred,if=(buff.clearcasting.react|(talent.dire_fixation.enabled&!debuff.dire_fixation.up))&!(variable.need_bt&buff.bt_shred.up)
+actions.builder+=/brutal_slash,if=cooldown.brutal_slash.full_recharge_time<4&!(variable.need_bt&buff.bt_brutal_slash.up)
+# stop pooling if clearcasting procs
+actions.builder+=/pool_resource,if=!action.rake.ready&(dot.rake.refreshable|(buff.sudden_ambush.up&persistent_multiplier>dot.rake.pmultiplier&dot.rake.remains>6))&!buff.clearcasting.react&!(variable.need_bt&buff.bt_rake.up)&!buff.apex_predators_craving.up
+actions.builder+=/shadowmeld,if=action.rake.ready&!buff.sudden_ambush.up&(dot.rake.refreshable|dot.rake.pmultiplier<1.4)&!(variable.need_bt&buff.bt_rake.up)&!buff.prowl.up&!buff.apex_predators_craving.up
+actions.builder+=/rake,if=(refreshable|(buff.sudden_ambush.up&persistent_multiplier>dot.rake.pmultiplier))&!(variable.need_bt&buff.bt_rake.up)
+actions.builder+=/moonfire_cat,target_if=refreshable
+actions.builder+=/thrash_cat,target_if=refreshable&!talent.thrashing_claws.enabled
+actions.builder+=/brutal_slash,if=!(variable.need_bt&buff.bt_brutal_slash.up)
+actions.builder+=/swipe_cat,if=spell_targets.swipe_cat>1|(talent.wild_slashes.enabled&(debuff.dire_fixation.up|!talent.dire_fixation.enabled))
+actions.builder+=/shred,if=!(variable.need_bt&buff.bt_shred.up)
+# fallback bloodtalons actions below this point
+actions.builder+=/moonfire_cat,if=variable.need_bt&buff.bt_moonfire.down
+actions.builder+=/swipe_cat,if=variable.need_bt&buff.bt_swipe.down
+actions.builder+=/rake,if=variable.need_bt&buff.bt_rake.down&persistent_multiplier=dot.rake.pmultiplier
+actions.builder+=/thrash_cat,if=variable.need_bt&buff.bt_thrash.down
+
 actions.cooldown=use_item,name=algethar_puzzle_box,if=fight_remains<35|(!variable.align_3minutes)
 actions.cooldown+=/use_item,name=algethar_puzzle_box,if=variable.align_3minutes&(cooldown.bs_inc.remains<3&(!variable.lastZerk|!variable.lastConvoke|(variable.lastConvoke&cooldown.convoke_the_spirits.remains<13)))
 # next two lines check if the current pull is long enough to justify cd usage. If its the last pull, itll always use cds.
@@ -96,25 +114,6 @@ actions.finisher+=/rip,target_if=((set_bonus.tier31_2pc&cooldown.feral_frenzy.re
 actions.finisher+=/pool_resource,for_next=1,if=!action.tigers_fury.ready&buff.apex_predators_craving.down&!(variable.short_circuit&buff.smoldering_frenzy.remains<5.2-talent.ashamanes_guidance)
 actions.finisher+=/ferocious_bite,max_energy=1,target_if=max:target.time_to_die,if=buff.apex_predators_craving.down&(!buff.bs_inc.up|(buff.bs_inc.up&!talent.soul_of_the_forest.enabled))
 actions.finisher+=/ferocious_bite,target_if=max:target.time_to_die,if=(buff.bs_inc.up&talent.soul_of_the_forest.enabled)|buff.apex_predators_craving.up
-
-# if you need to proc bloodtalons, skip actions that you've already casted towards bloodtalons
-actions.st_builder+=/thrash_cat,if=refreshable&buff.clearcasting.react
-actions.st_builder+=/shred,if=buff.clearcasting.react&!(variable.need_bt&buff.bt_shred.up)
-actions.st_builder+=/brutal_slash,if=cooldown.brutal_slash.full_recharge_time<4&!(variable.need_bt&buff.bt_brutal_slash.up)
-# stop pooling if clearcasting procs
-actions.st_builder+=/pool_resource,if=!action.rake.ready&(dot.rake.refreshable|(buff.sudden_ambush.up&persistent_multiplier>dot.rake.pmultiplier&dot.rake.remains>6))&!buff.clearcasting.react&!(variable.need_bt&buff.bt_rake.up)&!buff.apex_predators_craving.up
-actions.st_builder+=/shadowmeld,if=action.rake.ready&!buff.sudden_ambush.up&(dot.rake.refreshable|dot.rake.pmultiplier<1.4)&!(variable.need_bt&buff.bt_rake.up)&!buff.prowl.up&!buff.apex_predators_craving.up
-actions.st_builder+=/rake,if=(refreshable|(buff.sudden_ambush.up&persistent_multiplier>dot.rake.pmultiplier))&!(variable.need_bt&buff.bt_rake.up)
-actions.st_builder+=/moonfire_cat,target_if=refreshable
-actions.st_builder+=/thrash_cat,target_if=refreshable&!talent.thrashing_claws.enabled
-actions.st_builder+=/brutal_slash,if=!(variable.need_bt&buff.bt_brutal_slash.up)
-actions.st_builder+=/swipe_cat,if=spell_targets.swipe_cat>1|(talent.wild_slashes.enabled&(debuff.dire_fixation.up|!talent.dire_fixation.enabled))
-actions.st_builder+=/shred,if=!(variable.need_bt&buff.bt_shred.up)
-# fallback bloodtalons actions below this point
-actions.st_builder+=/moonfire_cat,if=variable.need_bt&buff.bt_moonfire.down
-actions.st_builder+=/swipe_cat,if=variable.need_bt&buff.bt_swipe.down
-actions.st_builder+=/rake,if=variable.need_bt&buff.bt_rake.down&persistent_multiplier=dot.rake.pmultiplier
-actions.st_builder+=/thrash_cat,if=variable.need_bt&buff.bt_thrash.down
 
 # its currently a gain to continuously try to proc bt in aoe during berserk
 actions.variables=variable,name=need_bt,value=talent.bloodtalons.enabled&(buff.bloodtalons.stack<=1|(buff.bs_inc.up&spell_targets.swipe_cat>1))
